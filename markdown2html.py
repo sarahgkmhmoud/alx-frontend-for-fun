@@ -5,7 +5,7 @@ import sys
 import markdown2html
 if __name__ == "__main__":
 
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
         sys.exit(1)
     filename_input = sys.argv[1]
