@@ -1,24 +1,32 @@
 #!/usr/bin/python3
-"""0. Start a script"""
 
+"""
+Markdown script using python.
+"""
 import sys
-import markdown2html
-if __name__ == "__main__":
+import os.path
+import re
+import hashlib
 
+if __name__ == '__main__':
     if len(sys.argv) < 3:
-        sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
-        sys.exit(1)
-    filename_input = sys.argv[1]
-    filename_output = sys.argv[2]
+        print('Usage: ./markdown2html.py README.md README.html',
+              file=sys.stderr)
+        exit(1)
 
-    try:
-        with open(filename_input, 'r') as f:
-            markedown_content = f.read()
-            html_content = markdown2html.markdown2html(markedown_content)
-    except FileNotFoundError:
-        sys.stderr.write(f"Missing {filename_input}\n")
-        sys.exit(1)
+    if not os.path.isfile(sys.argv[1]):
+        print('Missing {}'.format(sys.argv[1]), file=sys.stderr)
+        exit(1)
 
-    with open(filename_output, 'w') as file:
-        file.write(html_content)
-    sys.exit(0)
+    with open(sys.argv[1]) as read:
+        with open(sys.argv[2], 'w') as html:
+            for line in read:
+                length = len(line)
+                headings = line.lstrip('#')
+                heading_num = length - len(headings)
+                if 1 <= heading_num <= 6:
+                    line = '<h{}>'.format(
+                        heading_num) + headings.strip() + '</h{}>\n'.format(
+                        heading_num)
+                if length > 1:
+                        html.write(line)
