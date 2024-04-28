@@ -18,7 +18,7 @@ if __name__ == "__main__":
     except FileNotFoundError:
         sys.stderr.write(f"Missing {filename_input}\n")
         sys.exit(1)
- 
+
     with open(filename_output, 'w') as file:
         file.write(html_content)
     sys.exit(0)
