@@ -2,7 +2,7 @@
 """0. Start a script"""
 
 import sys
-import markdown
+import markdown2html
 if __name__ == "__main__":
 
     if len(sys.argv) < 3:
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     try:
         with open(filename_input, 'r') as f:
             markedown_content = f.read()
-            html_content = markdown.markdown(markedown_content)
+            html_content = markdown2html.markdown2html(markedown_content)
     except FileNotFoundError:
         sys.stderr.write(f"Missing {filename_input}\n")
         sys.exit(1)
