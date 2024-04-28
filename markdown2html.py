@@ -15,6 +15,6 @@ if __name__ == "__main__":
         with open(filename_input, 'r') as f:
             markedown_content = f.read()
     except FileNotFoundError:
-        sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
+        sys.stderr.write(f"Missing {filename_input}\n")
         sys.exit(1)
     sys.exit(0)
